@@ -1,286 +1,182 @@
-<div align="center">
-  <img src="Assets/logo.png" alt="gtube Logo" width="140" height="140">
-  <br><br>
-  
-  <div align="center">
-  
-<a href="https://trendshift.io/repositories/22545" target="_blank"><img src="https://trendshift.io/api/badge/repositories/22545" alt="محمود محسن%2FFlow | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+<div dir="rtl" align="center">
+
+<img src="Assets/logo.png" alt="شعار gtube" width="160" height="160">
+
+# gtube
+
+<h3>عميل يوتيوب ويوتيوب ميوزيك يحترم خصوصيتك على أندرويد، مع محرك توصيات يعمل بالكامل على جهازك.</h3>
 
 <br>
-<img src="https://img.shields.io/badge/Status-Active_Development-success?style=for-the-badge&logo=github-actions">
-<br>
-<!-- Downloads & Version -->
-<a href="https://github.com/محمود محسن/gtube/releases">
-  <img src="https://img.shields.io/github/downloads/محمود محسن/gtube/total?style=for-the-badge&color=orange&logo=github&label=Downloads">
+
+<a href="https://github.com/mkj555m5/gtube/releases">
+  <img src="https://img.shields.io/github/downloads/mkj555m5/gtube/total?style=for-the-badge&color=orange&logo=github&label=%D8%A7%D9%84%D8%AA%D8%AD%D9%85%D9%8A%D9%84%D8%A7%D8%AA">
 </a>
-<a href="https://github.com/محمود محسن/gtube/releases">
-  <img src="https://img.shields.io/github/v/release/محمود محسن/gtube?style=for-the-badge&color=crimson&label=Latest%20Version">
-</a>
-
-<br>
-
-<!-- Tech Stack -->
-<img src="https://img.shields.io/badge/Platform-Android_8.0+-3DDC84?style=for-the-badge&logo=android&logoColor=white">
+<img src="https://img.shields.io/badge/%D8%A7%D9%84%D9%85%D9%86%D8%B5%D8%A9-Android_8.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white">
 <img src="https://img.shields.io/badge/Kotlin-100%25-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white">
 <img src="https://img.shields.io/badge/Compose-Material_3-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white">
+<a href="LICENSE">
+  <img src="https://img.shields.io/badge/%D8%A7%D9%84%D8%B1%D8%AE%D8%B5%D8%A9-GPL_v3.0-blue?style=for-the-badge&logo=gnu-bash&logoColor=white">
+</a>
 
 <br>
 
-<!-- Community & License -->
-<a href="https://www.reddit.com/r/Flow_Official/">
-  <img src="https://img.shields.io/badge/Reddit-r%2FFlow__Official-FF4500?style=for-the-badge&logo=reddit&logoColor=white">
-</a>
-<img src="https://img.shields.io/github/stars/محمود محسن/gtube?style=for-the-badge&logo=star&color=gold">
-<img src="https://img.shields.io/github/forks/محمود محسن/gtube?style=for-the-badge&logo=git&color=silver">
-<a href="LICENSE">
-  <img src="https://img.shields.io/badge/License-GPL_v3.0-blue?style=for-the-badge&logo=gnu-bash&logoColor=white">
-</a>
-<img src="https://img.shields.io/github/last-commit/محمود محسن/gtube?style=for-the-badge&color=red">
-<a href="#cert">
-  <img src="https://img.shields.io/badge/Security-Verified_SHA--256-blue?style=for-the-badge&logo=security&logoColor=white">
-</a>
+**[تحميل النسخ](#تحميل-النسخ)** · **[المميزات](#المميزات)** · **[المنصات المدعومة](#المنصات-المدعومة)** · **[الشكر والاعتراف](#الشكر-والاعتراف)**
 
 </div>
 
-  <br><br>
-  
-  <h3>A privacy-respecting YouTube and YouTube Music client for Android with a local recommendation engine.</h3>
-  <p>
-    gtube is a YouTube client built with Jetpack Compose and Material 3.<br>
-    It includes FlowNeuro, a recommendation engine that runs entirely on your device — no accounts, no tracking, no data leaves your phone.
-  </p>
-  
-  <p>
-    <a href="https://github.com/محمود محسن/gtube/releases"><b>Download APK</b></a> · 
-    <a href="https://github.com/محمود محسن/gtube/wiki"><b>Documentation</b></a> · 
-    <a href="https://www.reddit.com/r/Flow_Official/"><b>Subreddit</b></a> · 
-    <a href="#support--donations"><b>Donate</b></a> .
-    <a href="#translate"><b>Translations</b></a>
-  </p>
-</div>
+---
+
+<div dir="rtl">
+
+## تنويه مهم: هذا مشروع مشتق من Flow
+
+> **gtube هي نسخة معدّلة (Fork) من مشروع [Flow](https://github.com/A-EDev/Flow) العريق** الذي طوّره المطور المبدع **[محمود محسن (A-EDev)](https://github.com/A-EDev)**.
+>
+> كل الشكر والامتنان له وللجميع من أسهموا في المشروع الأصلي على هذا العمل الرائع. هذا المستودع هو نسخة معدّلة من عمله لأغراض شخصية، وجميع الفضل في الفكرة والتصميم والبنية الأساسية يعود له وللمجتمع المشارك في المشروع الأصلي.
+
+## نبذة عن التطبيق
+
+gtube هو تطبيق عميل لمشاهدة محتوى يوتيوب ويوتيوب ميوزيك مبني بتقنيات Jetpack Compose و Material 3 الحديثة، ويمنحك تجربة مشاهدة كاملة دون إعلانات ودون تتبع ودون الحاجة إلى حساب جوجل. يضم التطبيق محرك توصيات ذكي يعمل بالكامل على جهازك ويحلل ما تشاهده محلياً ليقترح عليك محتوى يناسب ذوقك، دون أن تخرج أي بيانات من هاتفك إطلاقاً.
+
+معظم عملاء يوتيوب مفتوحة المصدر يمنحونك التشغيل فقط دون طريقة لاكتشاف محتوى جديد، فأنت إما تستخدم التطبيق الرسمي وتُتتبَّع، أو تستخدم بديلاً وتفقد التوصيات نهائياً. gtube يمنحك الاثنين معاً: محرك التوصيات يتعلم ما تحب من سلوك مشاهدتك محلياً، ويمكنك الاطلاع على كل ما يعرفه عنك في أي وقت وتعديله أو حذفه نهائياً.
+
+## المنصات المدعومة
+
+| المنصة | الحد الأدنى | ملاحظات |
+|:---:|:---:|:---|
+| 📱 هواتف وأجهزة لوحية أندرويد | Android 8.0 (API 26) | التجربة الكاملة بجميع المميزات |
+| 📺 أندرويد TV | Android 8.0 (API 26) | واجهة مخصصة للتلفزيون مع تنقل بالريموت |
+
+التطبيق مبني بالكامل بلغة **Kotlin** مع **Jetpack Compose** و **Material 3**، ويعتمد على **ExoPlayer (Media3)** لتشغيل الوسائط و **NewPipeExtractor** لاستخراج بيانات يوتيوب.
 
 ---
 
-## Why gtube?
+## المميزات
 
-Most open-source YouTube clients give you playback but no way to discover new content. You either use the official app and get tracked, or you use an alternative and lose recommendations entirely.
+### 🎬 الفيديو
+- تشغيل عالي الجودة عبر ExoPlayer (Media3) مع تبديل الدقة (1080p و 720p و 480p و 360p)
+- SponsorBlock — تخطي تلقائي للإعلانات المدمجة والمقدمات والخواتم والحشو
+- DeArrow — استبدال الصور المصغرة والعناوين الутكورية ببدائل من المجتمع
+- إعادة تفعيل زر عدم الإعجاب في يوتيوب (Return YouTube Dislike)
+- التشغيل في الخلفية — استمع للصوت مع إيقاف الشاشة
+- صورة داخل صورة (Picture-in-Picture) — واصل المشاهدة أثناء استخدام تطبيقات أخرى
+- البث إلى أجهزة التلفزيون الذكية وأجهزة البث
+- التحكم في سرعة التشغيل (من 0.25x إلى 2x)
+- فصول الفيديو مع التنقل السريع بينها
+- إيماءات التحكم في السطوع والصوت والتقديم
+- الترجمة مع تخصيص حجم الخط ولونه والخلفية
+- تنزيل الفيديوهات بدعم صيغ VP9 و AV1 والصيغ القياسية
+- استئناف المشاهدة من حيث توقفت
 
-gtube gives you both. The recommendation engine learns what you like by analyzing your watch behavior locally. It never leaves your devices. You can inspect everything it knows about you, adjust it, or wipe it at any time.
+### 🎵 الموسيقى
+- مشغل موسيقى مخصص مع صور الألبوم وتأثيرات بصرية صوتية
+- إدارة قائمة الانتظار مع الإضافة والحذف وإعادة الترتيب
+- التشغيل العشوائي والتكرار (فردي / الكل)
+- مشغل مصغّر دائم عبر أرجاء التطبيق
+- عرض كلمات الأغاني المتزامنة
+- جلب المقاطع من يوتيوب ميوزيك
 
----
+### 🧠 محرك التوصيات (FlowNeuro)
+- يعمل 100% على جهازك — بلا خوادم وبلا تتبع وبلا حساب
+- يتعلم مما تشاهده وتتخطاه وتعجب به وتبحث عنه ومدة مشاهدتك
+- يميز أنماط أيام الأسبوع عن عطلة نهاية الأسبوع، وتفضيلات الصباح عن المساء
+- يكتشف مللك من موضوع ما ويمزج محتوى جديداً في واجهتك
+- يمنع واجهتك من الانغلاق على موضوعين أو ثلاثة
+- يعرض مقاطع ذات صلة من مشاهداتك الأخيرة لانتقالات طبيعية بين المواضيع
+- يستخدم إشارات التفاعل (نسبة الإعجابات إلى المشاهدات) لتصفية المحتوى الرديء
+- لوحة شفافية كاملة — شاهد ما يعرفه المحرك عنك ولماذا اقترح شيئاً ما
+- تصدير/استيراد ملف تعريف التوصيات الخاص بك بالكامل
 
-## Features
+### 📚 المكتبة
+- سجل مشاهدة محلي
+- المفضلة وقوائم التشغيل المخصصة
+- واجهة Shorts مع حفظ المقاطع
+- رف "أكمل المشاهدة"
+- إدارة الاشتراكات مع تخزين مؤقت للواجهات
 
-### Video
-- High-quality playback via ExoPlayer (Media3) with resolution switching (1080p, 720p, 480p, 360p)
-- SponsorBlock — automatically skips sponsors, intros, outros, and filler
-- DeArrow — replaces clickbait thumbnails and titles with community-sourced alternatives
-- Return Youtube Dislike (RYD)
-- Background playback — listen to audio with the screen off
-- Picture-in-Picture — keep watching while using other apps
-- Casting to smart TVs and streaming devices
-- Playback speed control (0.25x to 2x)
-- Video chapters with seek jumping
-- Gesture controls for brightness, volume, and seeking
-- Subtitles with customizable font size, color, and background
-- Downloads with VP9, AV1, and standard format support
-- Resume playback from where you left off
+### 🔒 الخصوصية
+- لا حاجة لأي حساب جوجل
+- بلا إعلانات أو تحليلات أو تتبع
+- جميع البيانات محفوظة محلياً على جهازك
+- استيراد الاشتراكات والسجل من NewPipe
+- تصدير أو حذف كل شيء في أي وقت
 
-### Music
-- Dedicated music player with album art and audio visualizations
-- Queue management with add, remove, and reorder
-- Shuffle and repeat (single/all)
-- Persistent mini player across the app
-- Synchronized lyrics display
-- Fetches tracks from YouTube Music
-
-### Recommendations (FlowNeuro Engine)
-- Runs 100% on-device — no server, no telemetry, no account needed
-- Learns from what you watch, skip, like, dislike, search for, and how long you watch
-- Distinguishes weekday and weekend patterns, morning and night preferences
-- Detects when you're getting bored of a topic and mixes in new content
-- Prevents your feed from collapsing into the same 2-3 topics
-- Surfaces related videos from your recent watches to create natural topic transitions
-- Uses engagement signals (like-to-view ratios) to filter out low-quality content
-- Full transparency dashboard — see what the algorithm knows and why it recommended something
-- Export/import your entire recommendation profile as a file
-
-### Library
-- Local watch history
-- Favorites and custom playlists
-- Shorts feed with bookmarking
-- Continue watching shelf
-- Subscription management with cached feeds
-
-### Privacy
-- No Google account required
-- No ads, analytics, or tracking
-- All data stored locally on your device
-- Import subscriptions and history from NewPipe
-- Export or delete everything at any time
-
-### Appearance
-- 11 themes: Light, Dark, OLED Black, Ocean Blue, Forest Green, Sunset Orange, Purple Nebula, Midnight Black, Rose Gold, Arctic Ice, Crimson Red
-- Built entirely with Jetpack Compose and Material 3
+### 🎨 المظهر
+- 11 ثيمًا: فاتح، داكن، أسود OLED، أزرق محيطي، أخضر غابات، برتقالي الغروب، سديم بنفسجي، أسود منتصف الليل، ذهبي وردي، جليدي قطبي، أحمر قرمزي
+- مدمج بالكامل مع Jetpack Compose و Material 3
 
 ---
 
-## Screenshots
+## لقطات الشاشة
 
 <div align="center">
   <table>
     <tr>
-      <td align="center"><b>Home Feed</b><br><img src="Assets/Home.jpeg" width="240"></td>
-      <td align="center"><b>Video Player</b><br><img src="Assets/VideoPlayer.jpeg" width="240"></td>
-      <td align="center"><b>Personality Screen</b><br><img src="Assets/Personality.jpeg" width="240"></td>
+      <td align="center"><b>الرئيسية</b><br><img src="Assets/Home.jpeg" width="240"></td>
+      <td align="center"><b>مشغل الفيديو</b><br><img src="Assets/VideoPlayer.jpeg" width="240"></td>
+      <td align="center"><b>شخصيتك</b><br><img src="Assets/Personality.jpeg" width="240"></td>
     </tr>
     <tr>
-      <td align="center"><b>Music Player</b><br><img src="Assets/MusicPlayer.jpeg" width="240"></td>
-      <td align="center"><b>Music Hub</b><br><img src="Assets/Music.jpeg" width="240"></td>
-      <td align="center"><b>Your Library</b><br><img src="Assets/Library.jpeg" width="240"></td>
+      <td align="center"><b>مشغل الموسيقى</b><br><img src="Assets/MusicPlayer.jpeg" width="240"></td>
+      <td align="center"><b>مركز الموسيقى</b><br><img src="Assets/Music.jpeg" width="240"></td>
+      <td align="center"><b>مكتبتك</b><br><img src="Assets/Library.jpeg" width="240"></td>
     </tr>
     <tr>
       <td align="center"><b>Shorts</b><br><img src="Assets/Shorts.jpeg" width="240"></td>
-      <td align="center"><b>Subscriptions</b><br><img src="Assets/Subscriptions.jpeg" width="240"></td>
-      <td align="center"><b>Channel View</b><br><img src="Assets/Channel.jpeg" width="240"></td>
-    </tr>
-    <tr>
-      <td align="center"><b>Artist Page</b><br><img src="Assets/Artist.jpeg" width="240"></td>
-      <td align="center"></td>
-      <td align="center"></td>
+      <td align="center"><b>الاشتراكات</b><br><img src="Assets/Subscriptions.jpeg" width="240"></td>
+      <td align="center"><b>صفحة القناة</b><br><img src="Assets/Channel.jpeg" width="240"></td>
     </tr>
   </table>
 </div>
 
 ---
-## Download
 
-### Stable Release
+<a id="تحميل-النسخ"></a>
+## تحميل النسخ
 
-<div align="center">
-  <table border="0">
-    <tr>
-      <td align="center" style="vertical-align: middle; padding: 10px;">
-        <a href="https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/محمود محسن/gtube/">
-          <img src="https://github.com/ImranR98/Obtainium/blob/main/assets/graphics/badge_obtainium.png" alt="Obtainium" height="60">
-        </a>
-      </td>
-      <td align="center" style="vertical-align: middle; padding: 10px;">
-        <a href="https://github.com/محمود محسن/gtube/releases/latest">
-          <img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="GitHub" height="90">
-        </a>
-      </td>
-      <td align="center" style="vertical-align: middle; padding: 10px;">
-        <a href="https://apt.izzysoft.de/packages/io.github.mahmoudmohsen.flow">
-          <img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="IzzyOnDroid" height="90">
-        </a>
-      </td>
-    </tr>
-  </table>
-</div>
+تُبنى نسخ التطبيق تلقائياً عبر GitHub Actions عند كل تحديث للكود، وتُنشر مباشرة في [صفحة الإصدارات](https://github.com/mkj555m5/gtube/releases/tag/ci-latest).
 
-### Nightly / Debug Build
-> ⚠️ Nightly builds are unstable and may contain bugs. Use at your own risk.
+### النسخة المتاحة: Nightly (أداء كامل)
 
-<div align="center">
-  <a href="https://nightly.link/محمود محسن/gtube/workflows/build/main/flow-nightly-apk.zip">
-    <img src="https://github.com/machiav3lli/oandbackupx/blob/034b226cea5c1b30eb4f6a6f313e4dadcbb0ece4/badge_github.png" alt="Download from GitHub" height="75">
-  </a>
-  <p><b>No GitHub account required</b> — powered by <a href="https://nightly.link">nightly.link</a></p>
-</div>
+> النسخة الموصى بها — أداء كامل مع ضغط R8، عالمية لكل المعالجات، موقّعة بمفتاح تصحيح وقابلة للتثبيت مباشرة.
 
-### Requirements 
-**Minimum Requirement:** Android 8.0+
-<a id="cert"></a>
-### Verifying Authenticity
-To ensure the authenticity of the APK and verify it has not been tampered with, you can check the signing certificate fingerprint using tools like [AppVerifier](https://github.com/soupslurpr/AppVerifier).
+| الملف | الحجم | الرابط المباشر |
+|:---:|:---:|:---:|
+| 📦 **gtube-nightly.apk** | ~25 MB | [تحميل مباشر](https://github.com/mkj555m5/gtube/releases/download/ci-latest/gtube-nightly.apk) |
+| 🐞 **gtube-debug.apk** (للتجربة والتطوير) | ~59 MB | [تحميل مباشر](https://github.com/mkj555m5/gtube/releases/download/ci-latest/gtube-debug.apk) |
 
-**Release Certificate SHA-256 Fingerprint:**
-`43:22:29:4E:D4:CA:A2:D4:29:41:40:09:58:18:08:0F:FE:8A:CC:1F:BE:3C:DC:76:10:7D:F4:5C:52:86:BE:40`
+**متطلبات التشغيل:** أندرويد 8.0 فأحدث
+
+**التحقق من سلامة الملف:** يمكنك التحقق من بصمة SHA-256 لكل ملف من صفحة [الإصدارات](https://github.com/mkj555m5/gtube/releases/tag/ci-latest) (ملف checksums.txt) قبل التثبيت.
+
+> ⚠️ ملاحظة: هذه نسخة نشطة التطوير (Nightly)، فقد تحتوي على أخطاء غير مستقرة. إن واجهت مشكلة تأكد أولاً أنك على أحدث نسخة.
 
 ---
 
-<a id="support--donations"></a>
-## 💰 Support Development
+<a id="الشكر-والاعتراف"></a>
+## 🙏 الشكر والاعتراف
 
-gtube is a free and open-source project. As an independent developer without traditional banking access, keeping this project alive relies entirely on community support. 
+gtube يقف على أكتاف عمالقة، وكل الشكر للمشاريع والمنصات المشاركة التالية:
 
-**You can now easily support the project using a Credit Card, Apple Pay, or PayPal via Patreon!** (You can choose to support monthly, or just leave a simple one-time tip in the shop).
-
-<a href="https://patreon.com/mahmoudmohsen" target="_blank" rel="noreferrer noopener">
-  <img src="https://img.shields.io/badge/Patreon-Support_Flow-FF424D?style=for-the-badge&amp;logo=patreon&amp;logoColor=white" alt="Support gtube on Patreon">
-</a>
-
-<br>
-
-**Prefer to send Crypto directly?**
-If you already use crypto, you can send it directly to my wallets below:
-
-| Coin | Network | Address |
-| :--- | :--- | :--- |
-| **USDT** | TRC20 (Tron) | `TRz7VDrTWwCLCfQmYBEJakqcZgbFNWfUMP` |
-| **Bitcoin** | BTC | `bc1qgmkkxxvzvsymtpfazqfl93jw6k4jgy0xmrtnv8` |
-| **Ethereum** | ERC-20 | `0xfbac6f464fec7fe458e318971a42ba45b305b70e` |
-| **Solana** | SOL | `7b3SLgiVPb8qQUvERSPGRWoFoiGEDvkFuY98M1GEngug` |
-| **Monero** | XMR | `8AgaxZnpEvT8VXJpczpL7BQejwSEw97saJmKYqq4zKErbe9bkYSwUhJ813msPPbdYhF11oz4N7tfEj4Zi6k27fKD83ca1if` |
-
-*Your support helps me maintain the project and add amazing new features!*
+* **[Flow](https://github.com/A-EDev/Flow)** — المشروع الأصلي الذي تُبنى هذه النسخة عليه؛ كل الشكر للمطور [محمود محسن](https://github.com/A-EDev) على هذا العمل الرائع.
+* **[NewPipeExtractor](https://github.com/TeamNewPipe/NewPipeExtractor)** — العمود الفقري لاستخراج بيانات يوتيوب.
+* **[NewPipe](https://github.com/TeamNewPipe/NewPipe)** — لإلهامنا بأساسهم المتين في التعامل مع بيانات يوتيوب.
+* **[PipePipe](https://codeberg.org/NullPointerException/PipePipe)** — لتطبيقهم لبروتوكولي SABR و InnerTube في التشغيل.
+* **[PipePipe Developer Docs](https://priveetee.github.io/Docs-PipePipe/)** — لمرجعهم التوثيقي حول SABR و BotGuard/PoToken.
+* **[Metrolist](https://github.com/MetrolistGroup/Metrolist)** — لإلهامهم لأسلوب جلب الموسيقى الهجين ومعالجة الكلمات.
+* **[LibreTube](https://github.com/LibreTube/LibreTube)** — لإلهامهم لمعالجة SponsorBlock و DeArrow.
+* **[ExoPlayer](https://github.com/google/ExoPlayer)** — المعيار الذهبي لتشغيل الوسائط على أندرويد.
+* **[Jetpack Compose](https://developer.android.com/jetpack/compose)** — لتمكينهم واجهة عصرية جميلة.
+* **[Material Design 3](https://m3.material.io/)** — لنظام التصميم والإرشادات.
 
 ---
 
-## 🙏 Acknowledgments
+## 📄 الرخصة والحقوق
 
-gtube stands on the shoulders of giants. Special thanks to:
+**gtube** برنامج حر: يمكنك استخدامها ودراستها ومشاركتها وتطويرها بحرية. هي موزعة تحت رخصة **GNU General Public License v3 (GPLv3)**.
 
-*   **[NewPipeExtractor](https://github.com/TeamNewPipe/NewPipeExtractor):** The backbone of our data extraction.
-*   **[NewPipe](https://github.com/TeamNewPipe/NewPipe):** For inspiration from their solid foundation for YouTube data handling.
-*   **[PipePipe](https://codeberg.org/NullPointerException/PipePipe):** For their SABR and InnerTube playback implementation, which guided gtube's YouTube streaming pipeline.
-*   **[PipePipe Developer Docs](https://priveetee.github.io/Docs-PipePipe/):** For their reference documentation on SABR, BotGuard/PoToken attestation, and InnerTube extraction internals.
-*   **[MetroList](https://github.com/MetrolistGroup/Metrolist):** Inspiration for the Hybrid Music fetching approach, Lyrics handling and some icons design references.
-*   **[LibreTube](https://github.com/LibreTube/LibreTube):** Inspiration for SponsorBlock and DeArrow handling and some icons design references.
-*   **[ExoPlayer](https://github.com/google/ExoPlayer):** The gold standard for Android media playback.
-*   **[Jetpack Compose](https://developer.android.com/jetpack/compose):** For enabling the beautiful, modern UI.
-*   **[Material Design 3](https://m3.material.io/):** For the design system and guidelines.
+> 🚨 **للمطورين:** تتطلب هذه الرخصة أن يكون أي مشروع يستخدم كود gtube (بما في ذلك خوارزمية `FlowNeuroEngine`) مفتوح المصدر أيضاً تحت رخصة GPLv3. لا يجوز استخدام هذا الكود في تطبيق مغلق المصدر.
 
----
+**حقوق النسخة الأصلية (Flow):** © 2025-2026 [محمود محسن](https://github.com/A-EDev) — نشكره جزيل الشكر على إتاحة مشروعه كمصدر مفتوح.
 
-<div align="center">
-
-<a id="translate"></a>
-## Translations
-Help translate gtube into your language! 
-
-[![Translation status](https://hosted.weblate.org/widget/flow/strings/287x66-grey.png)](https://hosted.weblate.org/engage/flow/)
-
-[![Translation status](https://hosted.weblate.org/widget/flow/strings/horizontal-auto.svg)](https://hosted.weblate.org/engage/flow/)
-</div>
-
----
-
-## 📄 License & Copyright
-
-**gtube** is Free Software: You can use, study, share, and improve it at your will.
-It is distributed under the **GNU General Public License v3 (GPLv3)**.
-
-**Copyright © 2025-2026 محمود محسن**
-
-> 🚨 **For Developers:**
-> This license requires that any project using gtube's source code (including the `FlowNeuroEngine` algorithm) must also be **Open Source** under the GPLv3 license. You may not use this code in a proprietary or closed-source application.
-
----
-
-## Star History
-
-<a href="https://star-history.dera.page/#محمود محسن/gtube&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://star-history.dera.page/svg?repos=محمود محسن/gtube&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://star-history.dera.page/svg?repos=محمود محسن/gtube&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://star-history.dera.page/svg?repos=محمود محسن/gtube&type=date&legend=top-left" />
- </picture>
-</a>
-
----
-
-<div align="center">
-  <sub>Made with ❤️ by محمود محسن</sub>
 </div>

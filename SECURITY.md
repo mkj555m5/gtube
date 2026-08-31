@@ -17,7 +17,7 @@ Always update to the newest release before reporting a security issue.
 **Do not report security vulnerabilities through public GitHub issues.**
 
 Report privately through
-[GitHub Security Advisories](https://github.com/محمود محسن/gtube/security/advisories/new).
+[GitHub Security Advisories](https://github.com/mkj555m5/gtube/security/advisories/new).
 If you cannot use that form, email <flow.mahmoudmohsen@gmail.com>.
 
 Please include:
