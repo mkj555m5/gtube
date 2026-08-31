@@ -1,0 +1,159 @@
+@file:Suppress("ktlint:standard:backing-property-naming")
+
+package io.github.mahmoudmohsen.gtube.ui.screens.search
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.mahmoudmohsen.gtube.data.local.ContentType
+import io.github.mahmoudmohsen.gtube.data.local.SearchFilter
+import io.github.mahmoudmohsen.gtube.data.model.Video
+import io.github.mahmoudmohsen.gtube.data.paging.SearchPagingSource
+import io.github.mahmoudmohsen.gtube.data.paging.SearchResultItem
+import io.github.mahmoudmohsen.gtube.data.repository.YouTubeRepository
+import io.github.mahmoudmohsen.gtube.data.shorts.ShortsContentFilter
+import io.github.mahmoudmohsen.gtube.data.shorts.queue.ShortsQueueHandoff
+import io.github.mahmoudmohsen.gtube.data.shorts.queue.ShortsQueueSource
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
+import javax.inject.Inject
+
+// ── UI state ─────────────────────────────────────────────────────────────────
+
+data class SearchUiState(
+    val query: String = "",
+    val filters: SearchFilter? = null,
+)
+
+// ── ViewModel ─────────────────────────────────────────────────────────────────
+
+@HiltViewModel
+@OptIn(ExperimentalCoroutinesApi::class)
+class SearchViewModel
+    @Inject
+    constructor(
+        private val repository: YouTubeRepository,
+        private val shortsContentFilter: ShortsContentFilter,
+        private val shortsQueueHandoff: ShortsQueueHandoff,
+    ) : ViewModel() {
+        private val _uiState = MutableStateFlow(SearchUiState())
+        val uiState: StateFlow<SearchUiState> = _uiState.asStateFlow()
+
+        /**
+         * Internal trigger: emitting a new value here restarts the pager from page 0.
+         * Holds (query, contentFilters) so the PagingSource gets fresh arguments.
+         */
+        private data class SearchKey(
+            val query: String,
+            val contentFilters: List<String>,
+            val searchFilter: SearchFilter?,
+        )
+
+        private val _searchKey = MutableStateFlow<SearchKey?>(null)
+
+        /**
+         * flatMapLatest restarts the pager whenever [_searchKey] changes (new search
+         * or filter change), and cachedIn survives configuration changes.
+         */
+        val searchResults: Flow<PagingData<SearchResultItem>> =
+            _searchKey
+                .filterNotNull()
+                .filter { it.query.isNotBlank() }
+                .combine(shortsContentFilter.enabled) { key, shortsEnabled -> key to shortsEnabled }
+                .flatMapLatest { (key, shortsEnabled) ->
+                    Pager(
+                        config =
+                            PagingConfig(
+                                pageSize = 20,
+                                prefetchDistance = 6,
+                                enablePlaceholders = false,
+                                initialLoadSize = 20,
+                            ),
+                        pagingSourceFactory = {
+                            SearchPagingSource(key.query, key.contentFilters, key.searchFilter, shortsEnabled)
+                        },
+                    ).flow
+                }.cachedIn(viewModelScope)
+
+        // ── public API ────────────────────────────────────────────────────────────
+
+        fun shortsShelfSource(
+            shelf: List<Video>,
+            tapped: Video,
+        ): ShortsQueueSource = shortsQueueHandoff.sourceForShelf(shelf, tapped)
+
+        fun search(
+            query: String,
+            filters: SearchFilter? = null,
+        ) {
+            if (query.isBlank()) {
+                _uiState.value = SearchUiState()
+                _searchKey.value = null
+                return
+            }
+            _uiState.value = SearchUiState(query = query, filters = filters)
+            _searchKey.value = SearchKey(query, buildContentFilters(filters), filters)
+        }
+
+        fun updateFilters(filters: SearchFilter) {
+            val currentQuery = _uiState.value.query
+            _uiState.value = _uiState.value.copy(filters = filters)
+            if (currentQuery.isNotBlank()) {
+                _searchKey.value = SearchKey(currentQuery, buildContentFilters(filters), filters)
+            }
+        }
+
+        fun clearSearch() {
+            _uiState.value = SearchUiState()
+            _searchKey.value = null
+        }
+
+        suspend fun getSearchSuggestions(query: String): List<String> {
+            if (query.length < 2) return emptyList()
+            return try {
+                repository.getSearchSuggestions(query)
+            } catch (_: Exception) {
+                emptyList()
+            }
+        }
+
+        // ── helpers ───────────────────────────────────────────────────────────────
+
+        private fun buildContentFilters(filters: SearchFilter?): List<String> {
+            val list = mutableListOf<String>()
+            if (filters == null) return list
+
+            when (filters.contentType) {
+                ContentType.VIDEOS -> {
+                    list.add("videos")
+                }
+
+                ContentType.CHANNELS -> {
+                    list.add("channels")
+                }
+
+                ContentType.PLAYLISTS -> {
+                    list.add("playlists")
+                }
+
+                ContentType.LIVE -> {
+                    list.add("videos")
+                }
+
+                else -> {}
+            }
+
+            return list
+        }
+    }

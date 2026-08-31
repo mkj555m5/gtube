@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#0A0E27</color>
+    <color name="flow_primary">#1E90FF</color>
+    <color name="flow_primary_variant">#0B5FB0</color>
+    <color name="flow_secondary">#4DA6FF</color>
+    <color name="flow_red">#1E90FF</color>
+
+    <!-- App icon variant backgrounds (Gojo Satoru palette) -->
+    <color name="icon_bg_amoled">#050913</color>
+    <color name="icon_bg_monochrome">#FFFFFF</color>
+    <color name="icon_bg_ghost">#0A0E27</color>
+    <color name="icon_bg_dynamic">#101935</color>
+    <color name="icon_bg_flow_light">#F5F9FF</color>
+    <color name="icon_bg_flow_play">#E8F1FF</color>
+    <color name="icon_bg_material_sky">#D7E3FF</color>
+    <color name="icon_bg_material_mint">#C7E8F0</color>
+</resources>

@@ -1,0 +1,99 @@
+name: Android CI
+
+# Simple, reliable Android CI: builds an installable APK on every push to
+# main (or on demand), uploads it as a workflow artifact, and publishes it
+# to a rolling "ci-latest" GitHub Release so it always has a direct,
+# permanent download link.
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-ci-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build debug and nightly APKs
+        run: >
+          ./gradlew :app:assembleGithubDebug :app:assembleGithubNightly
+          --parallel --build-cache --stacktrace
+
+      - name: Collect APKs and checksums
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp app/build/outputs/apk/github/debug/app-github-universal-debug.apk \
+             dist/gtube-debug.apk
+          cp app/build/outputs/apk/github/nightly/app-github-universal-nightly.apk \
+             dist/gtube-nightly.apk
+          cd dist
+          sha256sum gtube-*.apk > checksums.txt
+          ls -lh
+
+      - name: Upload APKs as workflow artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gtube-apks
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Publish to rolling "ci-latest" release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ci-latest
+        run: |
+          set -euo pipefail
+          cat > release-body.md <<'EOF'
+          بناء تلقائي (CI) من فرع `main` — commit ${{ github.sha }}
+
+          ## ملفات التحميل
+          | الملف | الوصف |
+          |---|---|
+          | `gtube-nightly.apk` | نسخة Nightly (أداء كامل) — عالمية لكل المعالجات، قابلة للتثبيت مباشرة |
+          | `gtube-debug.apk` | نسخة Debug لأغراض التجربة والتطوير |
+
+          > كلا النسختين universal وتعمل على جميع أنواع المعالجات (arm64 / armv7 / x86).
+          EOF
+          sed -i "s/\${{ github.sha }}/${GITHUB_SHA::7}/" release-body.md
+          gh release create "$TAG" \
+            --prerelease \
+            --title "أحدث بناء تلقائي (CI)" \
+            --notes-file release-body.md 2>/dev/null || true
+          gh release upload "$TAG" dist/gtube-debug.apk dist/gtube-nightly.apk dist/checksums.txt --clobber
+
+      - name: Write download links to summary
+        run: |
+          {
+            echo '## روابط التحميل المباشرة'
+            echo
+            echo "- **Nightly APK:** ${{ github.server_url }}/${{ github.repository }}/releases/download/ci-latest/gtube-nightly.apk"
+            echo "- **Debug APK:** ${{ github.server_url }}/${{ github.repository }}/releases/download/ci-latest/gtube-debug.apk"
+            echo "- **صفحة الإصدار:** ${{ github.server_url }}/${{ github.repository }}/releases/tag/ci-latest"
+          } >> "$GITHUB_STEP_SUMMARY"
