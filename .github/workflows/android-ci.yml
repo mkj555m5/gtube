@@ -1,9 +1,10 @@
 name: Android CI
 
-# Simple, reliable Android CI: builds an installable APK on every push to
-# main (or on demand), uploads it as a workflow artifact, and publishes it
-# to a rolling "ci-latest" GitHub Release so it always has a direct,
-# permanent download link.
+# Simple, reliable Android CI for a large Compose app:
+# - Two parallel build jobs (debug / nightly) so each gets its own runner
+#   and the heavy R8 pass never pushes a combined build past the timeout.
+# - A lightweight publish job rolls both APKs into a permanent "ci-latest"
+#   GitHub Release with a direct download link.
 
 on:
   push:
@@ -18,8 +19,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
-    name: Build APK
+  build-debug:
+    name: Build Debug APK
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
@@ -39,30 +40,91 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build debug and nightly APKs
+      - name: Build debug APK
         run: >
-          ./gradlew :app:assembleGithubDebug :app:assembleGithubNightly
+          ./gradlew :app:assembleGithubDebug
           --parallel --build-cache --stacktrace
 
-      - name: Collect APKs and checksums
+      - name: Collect debug APK
         run: |
           set -euo pipefail
           mkdir -p dist
-          cp app/build/outputs/apk/github/debug/app-github-universal-debug.apk \
-             dist/gtube-debug.apk
-          cp app/build/outputs/apk/github/nightly/app-github-universal-nightly.apk \
-             dist/gtube-nightly.apk
-          cd dist
-          sha256sum gtube-*.apk > checksums.txt
-          ls -lh
+          cp app/build/outputs/apk/github/debug/app-github-universal-debug.apk dist/gtube-debug.apk
+          sha256sum dist/gtube-debug.apk
 
-      - name: Upload APKs as workflow artifacts
+      - name: Upload debug artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gtube-apks
+          name: gtube-debug-apk
           path: dist/*
           if-no-files-found: error
           retention-days: 30
+
+  build-nightly:
+    name: Build Nightly APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build nightly APK
+        run: >
+          ./gradlew :app:assembleGithubNightly
+          --parallel --build-cache --stacktrace
+
+      - name: Collect nightly APK
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cp app/build/outputs/apk/github/nightly/app-github-universal-nightly.apk dist/gtube-nightly.apk
+          sha256sum dist/gtube-nightly.apk
+
+      - name: Upload nightly artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gtube-nightly-apk
+          path: dist/*
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    name: Publish ci-latest Release
+    needs: [ build-debug, build-nightly ]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Download debug artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gtube-debug-apk
+          path: dist
+
+      - name: Download nightly artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: gtube-nightly-apk
+          path: dist
+
+      - name: Generate checksums
+        run: |
+          cd dist
+          sha256sum gtube-*.apk > checksums.txt
+          ls -lh
 
       - name: Publish to rolling "ci-latest" release
         env:
@@ -71,17 +133,18 @@ jobs:
         run: |
           set -euo pipefail
           cat > release-body.md <<'EOF'
-          بناء تلقائي (CI) من فرع `main` — commit ${{ github.sha }}
+          بناء تلقائي (CI) من فرع `main` — commit ${SHA}
 
           ## ملفات التحميل
           | الملف | الوصف |
           |---|---|
-          | `gtube-nightly.apk` | نسخة Nightly (أداء كامل) — عالمية لكل المعالجات، قابلة للتثبيت مباشرة |
-          | `gtube-debug.apk` | نسخة Debug لأغراض التجربة والتطوير |
+          | `gtube-nightly.apk` | النسخة الموصى بها — أداء كامل (R8)، عالمية لكل المعالجات، موقّعة بمفتاح تصحيح وقابلة للتثبيت مباشرة |
+          | `gtube-debug.apk` | نسخة التصحيح (Debug) لأغراض التجربة والتطوير، تُثبّت بجانب النسخة الرسمية |
 
-          > كلا النسختين universal وتعمل على جميع أنواع المعالجات (arm64 / armv7 / x86).
+          > كلا النسختين universal وتعملان على جميع المعالجات (arm64 / armv7 / x86 / x86_64).
+          > يُحدَّث هذا الإصدار تلقائياً مع كل بناء ناجح.
           EOF
-          sed -i "s/\${{ github.sha }}/${GITHUB_SHA::7}/" release-body.md
+          sed -i "s/\${SHA}/${GITHUB_SHA::7}/" release-body.md
           gh release create "$TAG" \
             --prerelease \
             --title "أحدث بناء تلقائي (CI)" \
