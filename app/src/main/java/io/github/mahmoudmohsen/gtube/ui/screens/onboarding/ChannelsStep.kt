@@ -244,8 +244,8 @@ private fun ChannelResultRow(
                     .clip(CircleShape)
                     .background(MaterialTheme.colorScheme.surfaceVariant),
             contentScale = ContentScale.Crop,
-            placeholder = painterResource(R.drawable.ic_notification_logo),
-            error = painterResource(R.drawable.ic_notification_logo),
+            placeholder = painterResource(R.drawable.ic_brand_logo),
+            error = painterResource(R.drawable.ic_brand_logo),
         )
         Spacer(Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {

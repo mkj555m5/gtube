@@ -40,15 +40,15 @@ private data class SplashIconOption(
 )
 
 private val SPLASH_ICONS = listOf(
-    SplashIconOption(".IconFlowRed",    R.drawable.ic_flow_logo),
-    SplashIconOption(".IconFlowLight",  R.drawable.ic_flow_logo),
+    SplashIconOption(".IconFlowRed",    R.drawable.ic_brand_logo),
+    SplashIconOption(".IconFlowLight",  R.drawable.ic_brand_logo),
     SplashIconOption(".IconFlowPlay",   R.drawable.ic_fg_flow_play),
     SplashIconOption(".IconAmoled",     R.drawable.splash_icon_amoled),
     SplashIconOption(".IconMonochrome", R.drawable.splash_icon_monochrome),
     SplashIconOption(".IconGhost",      R.drawable.splash_icon_ghost),
     SplashIconOption(".IconDynamic",    R.drawable.ic_launcher_dynamic_foreground, isDynamic = true),
-    SplashIconOption(".IconMaterialSky", R.drawable.ic_flow_logo),
-    SplashIconOption(".IconMaterialMint", R.drawable.ic_flow_logo)
+    SplashIconOption(".IconMaterialSky", R.drawable.ic_brand_logo),
+    SplashIconOption(".IconMaterialMint", R.drawable.ic_brand_logo)
 )
 
 @Composable

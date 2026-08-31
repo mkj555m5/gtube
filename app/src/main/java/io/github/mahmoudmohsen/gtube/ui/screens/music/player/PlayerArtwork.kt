@@ -103,7 +103,7 @@ fun PlayerArtwork(
                 contentAlignment = Alignment.Center,
             ) {
                 Image(
-                    painter = painterResource(R.drawable.ic_launcher_foreground),
+                    painter = painterResource(R.drawable.ic_brand_logo),
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize(0.42f),
                 )

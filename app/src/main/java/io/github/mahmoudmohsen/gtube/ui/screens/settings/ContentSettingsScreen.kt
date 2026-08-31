@@ -368,7 +368,7 @@ fun ContentSettingsScreen(onBackClick: () -> Unit) {
                     SettingsSwitchItem(
                         icon =
                             androidx.compose.ui.graphics.vector.ImageVector
-                                .vectorResource(id = R.drawable.ic_notification_logo),
+                                .vectorResource(id = R.drawable.ic_fg_flow_play),
                         title = stringResource(R.string.content_settings_show_app_logo_title),
                         subtitle = stringResource(R.string.content_settings_show_app_logo_subtitle),
                         checked = showAppLogoIcon,

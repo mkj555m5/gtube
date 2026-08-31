@@ -132,7 +132,7 @@ private fun TvAboutIdentity() {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                painter = painterResource(R.drawable.ic_notification_logo),
+                painter = painterResource(R.drawable.ic_brand_logo),
                 contentDescription = stringResource(R.string.app_logo_desc),
                 modifier = Modifier.size(64.dp),
                 tint = MaterialTheme.colorScheme.onSurface,

@@ -84,7 +84,7 @@ fun AboutScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_notification_logo),
+                        painter = painterResource(id = R.drawable.ic_brand_logo),
                         contentDescription = null,
                         modifier = Modifier.size(72.dp),
                         tint = MaterialTheme.colorScheme.onBackground,

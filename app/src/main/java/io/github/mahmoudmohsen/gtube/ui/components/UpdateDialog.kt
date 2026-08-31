@@ -116,7 +116,7 @@ fun UpdateDialog(
                                 .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)),
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_notification_logo),
+                            painter = painterResource(id = R.drawable.ic_brand_logo),
                             contentDescription = stringResource(R.string.update_flow),
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(40.dp),
