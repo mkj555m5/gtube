@@ -108,6 +108,9 @@ jobs:
     timeout-minutes: 15
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
       - name: Download debug artifact
         uses: actions/download-artifact@v4
         with:
@@ -129,6 +132,7 @@ jobs:
       - name: Publish to rolling "ci-latest" release
         env:
           GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
           TAG: ci-latest
         run: |
           set -euo pipefail
